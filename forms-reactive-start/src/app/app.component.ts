@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +17,21 @@ export class AppComponent implements OnInit {
         'username' : new FormControl(null, Validators.required),
         'email' : new FormControl(null, [Validators.email, Validators.required])
       }),
-      'gender' : new FormControl('male')
+      'gender' : new FormControl('male'),
+      'hobbies' : new FormArray([])
     });
   }
 
   onSubmit(){
     console.info(this.signUpForm);
+  }
+
+  addHobby(){
+    const control = new FormControl(null, Validators.required);
+    (<FormArray>this.signUpForm.get('hobbies')).push(control)
+  }
+
+  getControls() {
+    return (<FormArray>this.signUpForm.get('hobbies')).controls;
   }
 }
