@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
     // console.log(postData);
     this.postsService.createPosts(postData.title, postData.content).subscribe(responseData => {
       this.onFetchPosts();
+      console.info(responseData);
     })
   }
 
@@ -58,6 +59,11 @@ export class AppComponent implements OnInit {
     this.postsService.clearPosts().subscribe(responseData => {
       this.loadedPosts = []
     });
+  }
+
+  clearError(){
+    this.errorTitle = null;
+    this.errorMessage = null;
   }
 
 }
